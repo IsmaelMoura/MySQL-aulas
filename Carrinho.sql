@@ -4,8 +4,7 @@
 */
 
 create database dbloja;
-show databases;
-use dbloja; 
+use dbloja;
 describe carrinho;
 
 create table carrinho(
@@ -15,9 +14,6 @@ create table carrinho(
     valor varchar(250) not null
 );
 
--- drop database loja;
--- drop table carrinho;
-
 -- alterações
 alter table carrinho add column id int primary key auto_increment;
 alter table carrinho modify column produto varchar(250) not null;
@@ -26,7 +22,6 @@ alter table carrinho modify column produto varchar(250) not null;
 alter table carrinho modify column valor decimal(10,2) not null;
 
 -- CRUD Create
--- numeros não usam aspas
 insert into carrinho (produto,quantidade,valor) values ('Caneta Bic CX30',10,18.00);
 insert into carrinho (produto,quantidade,valor) values ('Mouse Razer',5,15.50);
 insert into carrinho (produto,quantidade,valor) values ('Lavadora de roupas',2,3000.25);
@@ -49,3 +44,37 @@ delete from carrinho where id = 3;
 
 -- Operações matemáticas no banco de dados
 select sum(valor*quantidade) as total from carrinho;
+
+
+
+
+
+-- timestamp default current_timestamp (data e hora automático)
+-- date (tipo de dados relacionados a data) YYYY/MM/DD
+create table estoque (
+	codigo int primary key auto_increment,
+    barcode varchar(50) unique,
+    produto varchar(100) not null,
+    fabricante varchar(100) not null,
+    datacad timestamp default current_timestamp,
+    dataval date not null,
+    quantidade int not null,
+    estoquemin int not null,
+    medida varchar(50) not null,
+    valor decimal(10,2),
+    loc varchar(100)
+);
+
+describe estoque;
+
+-- CRUD Create
+insert into estoque(produto,fabricante,dataval,quantidade,estoquemin,medida,valor,loc) 
+values ('Caneta BIC Verde','BIC',20221005,100,10,'CX',28.75,'Setor A P2');
+insert into estoque(produto,fabricante,dataval,quantidade,estoquemin,medida,valor,loc) 
+values ('Refrigerador Frost Free','Samsung',20221005,20,2,'UNI',268999.00,'Setor 7 P1');
+
+-- CRUD Read
+select * from estoque;
+
+-- CRUD Update
+update estoque set valor=26899.00 where codigo = 2;
