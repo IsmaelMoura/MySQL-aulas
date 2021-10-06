@@ -1,7 +1,7 @@
 # Banco de Dados - MySQL
 
 Projetos de banco de dados MySQL criado para o curso Técnico em Informática do Senac Tatuapé
-Aulas sobre tabelas e CRUD (Create Read Update Delete)
+Material para auxiliar nos estudos.
 
 ## Autor
 Ismael de Sousa
