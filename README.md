@@ -1,6 +1,6 @@
 # Banco de Dados - MySQL
 
-Projetos de banco de dados MySQL criado para o curso Técnico em Informática do Senac Tatuapé
+Projetos de banco de dados MySQL criado para o curso Técnico em Informática do Senac Tatuapé <br>
 Material para auxiliar nos estudos.
 
 ## Autor
