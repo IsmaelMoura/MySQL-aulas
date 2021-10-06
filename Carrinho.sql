@@ -72,9 +72,42 @@ insert into estoque(produto,fabricante,dataval,quantidade,estoquemin,medida,valo
 values ('Caneta BIC Verde','BIC',20221005,100,10,'CX',28.75,'Setor A P2');
 insert into estoque(produto,fabricante,dataval,quantidade,estoquemin,medida,valor,loc) 
 values ('Refrigerador Frost Free','Samsung',20221005,20,2,'UNI',268999.00,'Setor 7 P1');
+insert into estoque(produto,fabricante,dataval,quantidade,estoquemin,medida,valor,loc)
+values ('Mouse Razer Basilisk','Razer',20231001,200,10,'CX',380.00,'Setor 5 P3');
+insert into estoque(produto,fabricante,dataval,quantidade,estoquemin,medida,valor,loc)
+values ('Margarina Qualy 340g','Qualy',20170724,7,25,'UNI',8.00,'Setor 1 P4');
+insert into estoque(produto,fabricante,dataval,quantidade,estoquemin,medida,valor,loc)
+values ('Mandioca','Joservaldo Reis',20110228,17,30,'UNI',12.50,'Setor 4 P6');
+insert into estoque(produto,fabricante,dataval,quantidade,estoquemin,medida,valor,loc) 
+values ('Queijo Ricota','Piracanjuba',20210717,20,50,'G',25.75,'Setor 11 P7');
 
 -- CRUD Read
 select * from estoque;
 
 -- CRUD Update
 update estoque set valor=26899.00 where codigo = 2;
+update estoque set barcode='1029378019827319872' where codigo = 5;
+update estoque set produto='Bola de Ping-Pong',fabricante='Lacoste',dataval=20300926,quantidade=100,estoquemin=75,medida='UNI',valor=350.00,loc='Setor 99 P9' where codigo = 6;
+
+-- CRUD Delete
+delete from estoque where codigo = 2;
+
+-- inventário do estoque (total)
+select sum(valor*quantidade) as total from estoque;
+
+-- relatório de reposição do estoque 1
+select * from estoque where quantidade < estoquemin;
+
+-- relatório de reposição do estoque 2
+-- date_format() -> formatar a exibicção da data
+-- %d (dia) %m (mês) %y (ano 2 dígitos) %Y (ano 4 digitos)
+select codigo as código,produto,date_format(dataval,'%d/%m/%Y')
+as data_validade,quantidade,estoquemin as estoque_mínimo from estoque where quantidade < estoquemin;
+
+-- Relatório de produto vencidos 1 (validade dos produtos)
+select codigo as código,produto,date_format(dataval,'%d/%m/%Y') as data_validade from estoque;
+
+-- Relatório de validade dos produtos 2
+-- datediff() retorna a diferença em dias de duas datas
+-- curdate() data atual
+select codigo as código,produto,date_format(dataval,'%d/%m/%Y') as data_validade,datediff(dataval,curdate()) as dias_restantes from estoque;
